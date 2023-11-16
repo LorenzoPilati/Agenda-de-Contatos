@@ -31,6 +31,11 @@ export class FirebaseService {
     return this.firestore.collection(this.PATH).doc(id)
     .update({nome: contato.nome, telefone: contato.telefone});
   }
+  
+  updateWithAvatar(contato: Contato, id: string){
+    return this.firestore.collection(this.PATH).doc(id)
+    .update({nome: contato.nome, telefone: contato.telefone, downloadURL: contato.downloadURL});
+  }
 
   delete(contato: Contato){
     return this.firestore.collection(this.PATH)
@@ -55,7 +60,7 @@ export class FirebaseService {
           if(!contato.id){
             this.createWithAvatar(contato);
           }else{
-            this.update(contato, contato.id);
+            this.updateWithAvatar(contato, contato.id);
           }
         })
       })
